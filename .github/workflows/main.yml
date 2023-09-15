@@ -11,10 +11,12 @@ jobs:
         with:
           browser: chrome
           env: true
-        env:
-          CYPRESS_username: ${{secrets.CYPRESS_USERNAME}}
-          CYPRESS_password: ${{secrets.CYPRESS_PASSWORD}}
-      - run: echo '${{secrets.CYPRESS_USERNAME}}'
+          build: npm run build
+          start: npm start
+        # env:
+        #   CYPRESS_username: ${{secrets.CYPRESS_USERNAME}}
+        #   CYPRESS_password: ${{secrets.CYPRESS_PASSWORD}}
+      # - run: echo '${{secrets.CYPRESS_USERNAME}}'
       - uses: actions/upload-artifact@v3
         if: always()
         with:
