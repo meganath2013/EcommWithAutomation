@@ -7,4 +7,5 @@ module.exports = defineConfig({
     },
     baseUrl:'http://localhost:3006/',
   },
+  video:true
 });
