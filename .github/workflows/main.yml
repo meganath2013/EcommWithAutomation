@@ -14,10 +14,6 @@ jobs:
           env: true
           build: npm run build
           start: npm start
-        # env:
-        #   CYPRESS_username: ${{secrets.CYPRESS_USERNAME}}
-        #   CYPRESS_password: ${{secrets.CYPRESS_PASSWORD}}
-      # - run: echo '${{secrets.CYPRESS_USERNAME}}'
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -28,3 +24,11 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+            SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+            SOURCE: "./"
+            REMOTE_HOST: "ec2-184-73-58-1.compute-1.amazonaws.com"
+            REMOTE_USER: "ec2-user"
+            TARGET: "/home/ec2-user/EcommwithAutomation"
